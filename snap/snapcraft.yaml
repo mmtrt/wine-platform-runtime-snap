@@ -82,7 +82,6 @@ parts:
       - winbind
       - samba-libs
       - mesa-vulkan-drivers
-      - vulkan-utils
       - on amd64:
         - libasound2:i386
         - libavcodec57:i386
@@ -131,7 +130,6 @@ parts:
         - winbind:i386
         - samba-libs:i386
         - mesa-vulkan-drivers:i386
-        - vulkan-utils
     override-build: |
       snapcraftctl build
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init
