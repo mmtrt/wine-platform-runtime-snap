@@ -215,9 +215,16 @@ parts:
     after:
       - wine-runtime
 
-  fixup-vulkan-icd-paths:
+  libc-lol-patched:
     plugin: nil
     after: [wine-platform-runtime]
+    override-build: |
+      wget https://gist.github.com/mmtrt/578f4c0694fcfc968b2d9dcc90da4c0e/raw/d509248e78c734f648972d8119c7217c47d7ce27/libc6_2.27-3ubuntu1_i386.deb
+      dpkg -x libc6_2.27-3ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
+
+  fixup-vulkan-icd-paths:
+    plugin: nil
+    after: [libc-lol-patched]
     override-build: |
       sed -i -E 's,(^.+"library_path": ")/.*/,\1,' $SNAPCRAFT_STAGE/usr/share/vulkan/icd.d/*.json
       wget -nvc https://gist.github.com/mmtrt/8d1a2b9eb33429feb0197ec46b0acdf4/raw/a8082e47f3a9c2a4f5acd8cf81da6ec62c00d5fc/nvidia_icd.json -P $SNAPCRAFT_PART_INSTALL/usr/share/vulkan/icd.d
