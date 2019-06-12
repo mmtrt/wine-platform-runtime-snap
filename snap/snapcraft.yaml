@@ -219,8 +219,10 @@ parts:
     plugin: nil
     after: [wine-platform-runtime]
     override-build: |
-      wget https://gist.github.com/mmtrt/578f4c0694fcfc968b2d9dcc90da4c0e/raw/d509248e78c734f648972d8119c7217c47d7ce27/libc6_2.27-3ubuntu1_i386.deb
-      dpkg -x libc6_2.27-3ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
+      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "x86_64-linux-gnu" ]; then
+        wget https://gist.github.com/mmtrt/578f4c0694fcfc968b2d9dcc90da4c0e/raw/d509248e78c734f648972d8119c7217c47d7ce27/libc6_2.27-3ubuntu1_i386.deb
+        dpkg -x libc6_2.27-3ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
+      fi
 
   fixup-vulkan-icd-paths:
     plugin: nil
