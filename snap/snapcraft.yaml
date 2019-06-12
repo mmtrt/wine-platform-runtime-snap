@@ -31,6 +31,17 @@ parts:
         apt update
       fi
 
+  ppa:
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      apt-add-repository ppa:oibaf/graphics-drivers -y
+      apt update
+    build-packages:
+      - software-properties-common
+    after:
+      - enable-i386
+
   wine-runtime:
     plugin: nil
     stage-packages:
@@ -146,7 +157,7 @@ parts:
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pixmaps
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pkgconfig
     after:
-      - enable-i386
+      - ppa
 
   wine-platform-runtime:
     plugin: dump
