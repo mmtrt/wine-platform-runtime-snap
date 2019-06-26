@@ -194,6 +194,9 @@ parts:
       chmod +x $SNAPCRAFT_PART_INSTALL/winetricks
       touch $SNAPCRAFT_PART_INSTALL/wprfile
       update-mime-database $SNAPCRAFT_PART_INSTALL/usr/share/mime
+      sed -i 's|/usr|$SNAP/wine-runtime/usr|' $SNAPCRAFT_PART_INSTALL/usr/bin/7z
+      sed -i 's|/usr|$SNAP/wine-runtime/usr|' $SNAPCRAFT_PART_INSTALL/usr/bin/7za
+      sed -i 's|/usr|$SNAP/wine-runtime/usr|' $SNAPCRAFT_PART_INSTALL/usr/bin/7zr
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init.d
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/logrotate.d
