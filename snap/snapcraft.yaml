@@ -159,8 +159,6 @@ parts:
     organize:
       'winetricks': bin/
       'zenity': bin/
-      'wprfile': bin/
-      'nlpfile': bin/
     stage-packages:
       - cabextract         # winetricks
       - libgdk-pixbuf2.0-0 # yad
@@ -177,7 +175,8 @@ parts:
       snapcraftctl build
       wget --quiet "https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks" -O $SNAPCRAFT_PART_INSTALL/winetricks
       chmod +x $SNAPCRAFT_PART_INSTALL/winetricks
-      touch $SNAPCRAFT_PART_INSTALL/{wprfile,nlpfile}
+      touch $SNAPCRAFT_PART_INSTALL/bin/wprfile
+      touch $SNAPCRAFT_PART_INSTALL/bin/nlpfile
       update-mime-database $SNAPCRAFT_PART_INSTALL/usr/share/mime
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init.d
