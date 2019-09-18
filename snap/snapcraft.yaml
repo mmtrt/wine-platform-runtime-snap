@@ -159,6 +159,8 @@ parts:
     organize:
       'winetricks': bin/
       'zenity': bin/
+      'wprfile': bin/
+      'nlpfile': bin/
     stage-packages:
       - cabextract         # winetricks
       - libgdk-pixbuf2.0-0 # yad
