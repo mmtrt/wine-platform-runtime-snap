@@ -89,6 +89,7 @@ parts:
       - libxrender1
       - libxslt1.1
       - libxxf86vm1
+      - ocl-icd-libopencl1
       - util-linux
       - winbind
       - samba-libs
@@ -139,6 +140,7 @@ parts:
         - libxrender1:i386
         - libxslt1.1:i386
         - libxxf86vm1:i386
+        - ocl-icd-libopencl1:i386
         - winbind:i386
         - samba-libs:i386
         - mesa-vulkan-drivers:i386
