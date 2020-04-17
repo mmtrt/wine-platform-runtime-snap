@@ -178,7 +178,6 @@ parts:
     plugin: dump
     source: snap/local/scripts
     organize:
-      'winetricks': bin/
       'zenity': bin/
       'wprfile': bin/
     stage-packages:
@@ -195,8 +194,6 @@ parts:
       - yad                # winetricks
     override-build: |
       snapcraftctl build
-      wget --quiet "https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks" -O $SNAPCRAFT_PART_INSTALL/winetricks
-      chmod +x $SNAPCRAFT_PART_INSTALL/winetricks
       touch $SNAPCRAFT_PART_INSTALL/wprfile
       update-mime-database $SNAPCRAFT_PART_INSTALL/usr/share/mime
       rm -rf $SNAPCRAFT_PART_INSTALL/etc/init
@@ -239,9 +236,18 @@ parts:
         dpkg -x libc6_2.27-3ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
       fi
 
-  fixup-vulkan-icd-paths:
+  fixup-winetricks:
     plugin: nil
     after: [libc-lol-patched]
+    organize:
+      'winetricks': bin/
+    override-build: |
+      wget -nvc "https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks" -O $SNAPCRAFT_PART_INSTALL/winetricks
+      chmod +x $SNAPCRAFT_PART_INSTALL/winetricks
+
+  fixup-vulkan-icd-paths:
+    plugin: nil
+    after: [fixup-winetricks]
     override-build: |
       sed -i -E 's,(^.+"library_path": ")/.*/,\1,' $SNAPCRAFT_STAGE/usr/share/vulkan/icd.d/*.json
       wget -nvc https://gist.github.com/mmtrt/8d1a2b9eb33429feb0197ec46b0acdf4/raw/a8082e47f3a9c2a4f5acd8cf81da6ec62c00d5fc/nvidia_icd.json -P $SNAPCRAFT_PART_INSTALL/usr/share/vulkan/icd.d
