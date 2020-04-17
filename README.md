@@ -20,9 +20,8 @@ Features:
 Snap provides WINE runtime libraries that can be used by these snaps.
 
 - wine-platform-3-stable
-- wine-platform-4-stable
-- wine--platform-4-devel
-- wine--platform-4-staging
+- wine-platform-4-(stable|devel|staging)
+- wine-platform-5-(stable|devel|staging)
 
 Currently powering the following snaps that are using this snap:
 
@@ -42,6 +41,7 @@ Currently powering the following snaps that are using this snap:
 - resourcehacker
 - utorrent
 - winsnap
+- other snaps that are created by other devs
 
 Note: This snap does not provides any ability to run WIN applications from itself but it only shares libraries and other pkg releases PATHS that are available via content interface.
 
