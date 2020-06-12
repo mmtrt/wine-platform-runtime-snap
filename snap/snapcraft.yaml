@@ -167,6 +167,8 @@ parts:
     organize:
       'zenity': bin/
       'wprfile': bin/
+    build-packages:
+      - libxml2
     stage-packages:
       - cabextract         # winetricks
       - libgdk-pixbuf2.0-0 # yad
