@@ -82,7 +82,7 @@ parts:
       - winbind
       - samba-libs
       - mesa-vulkan-drivers
-      - p7zip-full:i386
+      - p7zip-full
       - on amd64:
         - libasound2:i386
         - libavcodec58:i386
