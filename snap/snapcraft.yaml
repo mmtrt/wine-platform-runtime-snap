@@ -168,6 +168,7 @@ parts:
       'zenity': bin/
       'wprfile': bin/
     build-packages:
+      - libglib2.0-0
       - libxml2
     stage-packages:
       - cabextract         # winetricks
