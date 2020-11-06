@@ -9,6 +9,7 @@ confinement: strict
 architectures:
   - build-on: amd64
 base: core20
+compression: lzo
 
 slots:
   wine-runtime:
