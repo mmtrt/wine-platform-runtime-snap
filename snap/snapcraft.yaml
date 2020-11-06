@@ -219,8 +219,8 @@ parts:
     after: [wine-platform-runtime]
     override-build: |
       if [ "$SNAPCRAFT_ARCH_TRIPLET" = "x86_64-linux-gnu" ]; then
-        wget https://launchpad.net/~mmtrt/+archive/ubuntu/testing/+files/libc6_2.31-0~focal1_i386.deb
-        dpkg -x libc6_2.31-0~focal1_i386.deb $SNAPCRAFT_PART_INSTALL
+        wget https://launchpad.net/~mmtrt/+archive/ubuntu/testing/+files/libc6_2.31-f~0ubuntu1_i386.deb
+        dpkg -x libc6_2.31-f~0ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
       fi
 
   fixup-winetricks:
