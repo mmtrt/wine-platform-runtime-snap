@@ -84,6 +84,7 @@ parts:
       - samba-libs
       - mesa-vulkan-drivers
       - p7zip-full
+      - xdotool
       - on amd64:
         - libasound2:i386
         - libavcodec57:i386
@@ -134,6 +135,7 @@ parts:
         - samba-libs:i386
         - mesa-vulkan-drivers:i386
         - p7zip-full:i386
+        - xdotool:i386
     override-build: |
       snapcraftctl build
       sed -i 's|/usr|$SNAP/wine-runtime/usr|' $SNAPCRAFT_PART_INSTALL/usr/bin/7z
