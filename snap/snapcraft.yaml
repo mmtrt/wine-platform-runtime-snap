@@ -8,8 +8,8 @@ grade: stable
 confinement: strict
 architectures:
   - build-on: amd64
-  - build-on: i386
-base: core18
+base: core20
+compression: lzo
 
 slots:
   wine-runtime:
@@ -46,7 +46,9 @@ parts:
     plugin: nil
     stage-packages:
       - libasound2
-      - libavcodec57
+      - libasound2-plugins
+      - libavcodec58
+      - libfaudio0
       - libgphoto2-6
       - libgstreamer-plugins-base1.0-0
       - locales-all
@@ -94,10 +96,12 @@ parts:
       - winbind
       - samba-libs
       - mesa-vulkan-drivers
-      - p7zip-full:i386
+      - p7zip-full
       - on amd64:
         - libasound2:i386
-        - libavcodec57:i386
+        - libasound2-plugins:i386
+        - libavcodec58:i386
+        - libfaudio0:i386
         - libgphoto2-6:i386
         - libgstreamer-plugins-base1.0-0:i386
         - locales-all:i386
@@ -144,7 +148,6 @@ parts:
         - winbind:i386
         - samba-libs:i386
         - mesa-vulkan-drivers:i386
-        - p7zip-full:i386
     override-build: |
       snapcraftctl build
       sed -i 's|/usr|$SNAP/wine-runtime/usr|' $SNAPCRAFT_PART_INSTALL/usr/bin/7z
@@ -163,14 +166,6 @@ parts:
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/man
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pixmaps
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pkgconfig
-      # Remove stock glibc i386 files on amd64
-      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "x86_64-linux-gnu" ]; then
-       rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/audit
-       rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/gconv
-       for libs in ld-2.27.so libBrokenLocale-2.27.so libSegFault.so libanl-2.27.so libc-2.27.so libcidn-2.27.so libcrypt-2.27.so libdl-2.27.so libm-2.27.so libmemusage.so libnsl-2.27.so libnss_compat-2.27.so libnss_dns-2.27.so libnss_files-2.27.so libnss_hesiod-2.27.so libnss_nis-2.27.so libnss_nisplus-2.27.so libpcprofile.so libpthread-2.27.so libresolv-2.27.so librt-2.27.so libthread_db-1.0.so libutil-2.27.so; do
-       rm $SNAPCRAFT_PART_INSTALL/lib/i386-linux-gnu/$libs
-       done
-      fi
     after:
       - ppa
 
@@ -180,6 +175,9 @@ parts:
     organize:
       'zenity': bin/
       'wprfile': bin/
+    build-packages:
+      - libglib2.0-0
+      - libxml2
     stage-packages:
       - cabextract         # winetricks
       - libgdk-pixbuf2.0-0 # yad
@@ -232,8 +230,8 @@ parts:
     after: [wine-platform-runtime]
     override-build: |
       if [ "$SNAPCRAFT_ARCH_TRIPLET" = "x86_64-linux-gnu" ]; then
-        wget https://gist.github.com/mmtrt/578f4c0694fcfc968b2d9dcc90da4c0e/raw/d509248e78c734f648972d8119c7217c47d7ce27/libc6_2.27-3ubuntu1_i386.deb
-        dpkg -x libc6_2.27-3ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
+        wget https://launchpad.net/~mmtrt/+archive/ubuntu/testing/+files/libc6_2.31-f~0ubuntu1_i386.deb
+        dpkg -x libc6_2.31-f~0ubuntu1_i386.deb $SNAPCRAFT_PART_INSTALL
       fi
 
   fixup-winetricks:
