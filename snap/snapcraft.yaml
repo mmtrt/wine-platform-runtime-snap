@@ -166,6 +166,14 @@ parts:
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/man
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pixmaps
       rm -rf $SNAPCRAFT_PART_INSTALL/usr/share/pkgconfig
+      # Remove stock glibc i386 files on amd64
+      if [ "$SNAPCRAFT_ARCH_TRIPLET" = "x86_64-linux-gnu" ]; then
+       rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/audit
+       rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/i386-linux-gnu/gconv
+       for libs in ld-2.31.so libBrokenLocale-2.31.so libSegFault.so libanl-2.31.so libc-2.31.so libdl-2.31.so libm-2.31.so libmemusage.so libnsl-2.31.so libnss_compat-2.31.so libnss_dns-2.31.so libnss_files-2.31.so libnss_hesiod-2.31.so libnss_nis-2.31.so libnss_nisplus-2.31.so libpcprofile.so libpthread-2.31.so libresolv-2.31.so librt-2.31.so libthread_db-1.0.so libutil-2.31.so; do
+       rm $SNAPCRAFT_PART_INSTALL/lib/i386-linux-gnu/$libs
+       done
+      fi
     after:
       - ppa
 
