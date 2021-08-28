@@ -179,6 +179,7 @@ parts:
       'zenity': bin/
       'wprfile': bin/
     build-packages:
+      - libpsl5
       - libglib2.0-0
       - libxml2
     stage-packages:
