@@ -10,6 +10,7 @@ architectures:
   - build-on: amd64
   - build-on: i386
 base: core18
+compression: lzo
 
 slots:
   wine-runtime:
@@ -35,9 +36,11 @@ parts:
     plugin: nil
     stage-packages:
       - libasound2
+      - libasound2-plugins
       - libavcodec57
       - libgphoto2-6
       - libgstreamer-plugins-base1.0-0
+      - libgcrypt20
       - locales-all
       - liblcms2-2
       - libldap-2.4-2
@@ -79,6 +82,7 @@ parts:
       - libxslt1.1
       - libxxf86vm1
       - ocl-icd-libopencl1
+      - binutils
       - util-linux
       - winbind
       - samba-libs
@@ -86,9 +90,11 @@ parts:
       - p7zip-full
       - on amd64:
         - libasound2:i386
+        - libasound2-plugins:i386
         - libavcodec57:i386
         - libgphoto2-6:i386
         - libgstreamer-plugins-base1.0-0:i386
+        - libgcrypt20:i386
         - locales-all:i386
         - liblcms2-2:i386
         - libldap-2.4-2:i386
