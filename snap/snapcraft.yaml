@@ -244,3 +244,4 @@ parts:
       for snap in "core18" "gtk-common-themes" "gnome-3-28-1804"; do
         cd "/snap/$snap/current" && find * -type f,l -exec rm -r "$SNAPCRAFT_PRIME/{}" \; 2>/dev/null
       done
+      find "$SNAPCRAFT_PRIME/" -type d -exec rmdir {} + 2>/dev/null
