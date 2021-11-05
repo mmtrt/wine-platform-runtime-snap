@@ -101,6 +101,8 @@ parts:
       - samba-libs
       - mesa-vulkan-drivers
       - p7zip-full
+      - mesa-utils
+      - vulkan-tools
       - on amd64:
         - libasound2:i386
         - libasound2-plugins:i386
