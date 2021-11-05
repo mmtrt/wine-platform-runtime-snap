@@ -274,7 +274,8 @@ parts:
       wget 2>/dev/null -qO- https://github.com/$(wget 2>/dev/null -qO- https://github.com/flightlessmango/MangoHud/releases/latest | grep download/ | cut -d '"' -f2 | head -n1) | /usr/bin/7z x $(tar zxvf - --wildcards *.tar) -xr'!doc' -xr'!man' | xargs rm -rf ./MangoHud
       find "./usr" -type d -execdir chmod 755 {} +
       mv ./usr $SNAPCRAFT_PART_INSTALL/
-      sed -i 's|/usr|$SNAP/wine-runtime/usr|g' $SNAPCRAFT_PART_INSTALL/usr/bin/mangohud $SNAPCRAFT_PART_INSTALL/usr/share/vulkan/implicit_layer.d/MangoHud.json
+      sed -i 's|/usr|$SNAP/wine-runtime/usr|g' $SNAPCRAFT_PART_INSTALL/usr/bin/mangohud
+      sed -i -E 's,(^.+"library_path": ")/.*/,\1,' $SNAPCRAFT_PART_INSTALL/usr/share/vulkan/implicit_layer.d/MangoHud.json
     build-packages:
       - p7zip-full
       - wget
