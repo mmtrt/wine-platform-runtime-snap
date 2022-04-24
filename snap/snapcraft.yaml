@@ -83,6 +83,7 @@ parts:
       - libxxf86vm1
       - ocl-icd-libopencl1
       - binutils
+      - bc
       - util-linux
       - winbind
       - samba-libs
