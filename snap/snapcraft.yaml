@@ -185,6 +185,9 @@ parts:
       fi
     after:
       - ppa
+    prime:
+      - -usr/share/vulkan/icd.d/lvp_icd.i686.json
+      - -usr/share/vulkan/icd.d/lvp_icd.x86_64.json
 
   wine-platform-runtime:
     plugin: dump
